@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/Features/Account/presentation/views/account_view.dart';
 import 'package:polo/Features/Ads/presentation/views/add_ad_view.dart';
 import 'package:polo/Features/Favorites/presentation/views/favorites_view.dart';
@@ -14,13 +15,21 @@ class MainShellView extends StatefulWidget {
 
 class _MainShellViewState extends State<MainShellView> {
   int _currentIndex = 0;
+  int _favoritesKey = 0;
 
-  final List<Widget> _pages = const [
-    HomeView(),
-    FavoritesView(),
-    AddAdView(),
-    AccountView(),
-  ];
+  void _onTabSelected(int index) {
+    setState(() {
+      _currentIndex = index;
+      if (index == 1) _favoritesKey++;
+    });
+  }
+
+  List<Widget> get _pages => [
+        const HomeView(),
+        FavoritesView(key: ValueKey('favorites_$_favoritesKey')),
+        const AddAdView(),
+        const AccountView(),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +51,7 @@ class _MainShellViewState extends State<MainShellView> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -51,28 +60,28 @@ class _MainShellViewState extends State<MainShellView> {
                   activeIcon: Icons.home,
                   label: 'Home',
                   isActive: _currentIndex == 0,
-                  onTap: () => setState(() => _currentIndex = 0),
+                  onTap: () => _onTabSelected(0),
                 ),
                 _NavItem(
                   icon: Icons.favorite_border,
                   activeIcon: Icons.favorite,
                   label: 'Favorites',
                   isActive: _currentIndex == 1,
-                  onTap: () => setState(() => _currentIndex = 1),
+                  onTap: () => _onTabSelected(1),
                 ),
                 _NavItem(
                   icon: Icons.add_circle_outline,
                   activeIcon: Icons.add_circle,
                   label: 'Add Ad',
                   isActive: _currentIndex == 2,
-                  onTap: () => setState(() => _currentIndex = 2),
+                  onTap: () => _onTabSelected(2),
                 ),
                 _NavItem(
                   icon: Icons.person_outline,
                   activeIcon: Icons.person,
                   label: 'Account',
                   isActive: _currentIndex == 3,
-                  onTap: () => setState(() => _currentIndex = 3),
+                  onTap: () => _onTabSelected(3),
                 ),
               ],
             ),
@@ -105,7 +114,7 @@ class _NavItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -117,15 +126,15 @@ class _NavItem extends StatelessWidget {
                     ).createShader(bounds),
               child: Icon(
                 isActive ? activeIcon : icon,
-                size: 26,
+                size: 26.sp,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             Text(
               label,
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 11.sp,
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                 color: isActive ? AppColors.primary : AppColors.icon,
               ),

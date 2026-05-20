@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/Features/Home/Data/data/home_mock_data.dart';
 import 'package:polo/Features/Home/presentation/widgets/category_grid_card.dart';
 import 'package:polo/core/resourses/app_routes.dart';
@@ -10,15 +11,16 @@ class CategoriesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const AppBackHeader(title: 'Categories'),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24.w),
         child: GridView.builder(
           itemCount: HomeMockData.categories.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 14,
-            crossAxisSpacing: 14,
+            mainAxisSpacing: 14.h,
+            crossAxisSpacing: 14.w,
             childAspectRatio: 1.05,
           ),
           itemBuilder: (context, index) {

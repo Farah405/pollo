@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/Features/Home/Data/models/category_model.dart';
 import 'package:polo/core/resourses/app_styles.dart';
 import 'package:polo/core/resourses/colors.dart';
@@ -20,61 +21,67 @@ class ProductListCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 14),
-        padding: const EdgeInsets.all(12),
+        margin: EdgeInsets.only(bottom: 14.h),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
           color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: AppColors.border.withValues(alpha: 0.6)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                product.image,
-                width: 90,
-                height: 90,
-                fit: BoxFit.cover,
+            Hero(
+              tag: 'product_${product.id}',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.r),
+                child: Image.asset(
+                  product.image,
+                  width: 90.w,
+                  height: 90.w,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            const SizedBox(width: 14),
+            SizedBox(width: 14.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     product.title,
-                    style: AppStyles.bold16.copyWith(fontSize: 15),
+                    style: AppStyles.bold16.copyWith(fontSize: 15.sp),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6.h),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 4),
+                      Icon(Icons.star, color: Colors.amber, size: 16.sp),
+                      SizedBox(width: 4.w),
                       Text(
                         '${product.rating}',
-                        style: AppStyles.regular14,
+                        style: AppStyles.regular14.copyWith(fontSize: 13.sp),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         '(${product.reviews})',
-                        style: AppStyles.grey14,
+                        style: AppStyles.grey14.copyWith(fontSize: 12.sp),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     '\$${product.price.toStringAsFixed(2)}',
                     style: AppStyles.bold18.copyWith(
                       color: AppColors.primary,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                     ),
                   ),
                 ],
@@ -90,6 +97,7 @@ class ProductListCard extends StatelessWidget {
                   color: product.isFavorite
                       ? AppColors.primary
                       : AppColors.icon,
+                  size: 24.sp,
                 ),
               ),
           ],

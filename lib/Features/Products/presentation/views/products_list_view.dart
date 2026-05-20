@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/Features/Home/Data/data/home_mock_data.dart';
 import 'package:polo/Features/Home/Data/models/category_model.dart';
 import 'package:polo/Features/Home/presentation/widgets/product_list_card.dart';
 import 'package:polo/core/resourses/app_routes.dart';
+import 'package:polo/core/resourses/app_styles.dart';
+import 'package:polo/core/resourses/colors.dart';
 import 'package:polo/core/widgets/app_back_header.dart';
 
 class ProductsListView extends StatefulWidget {
@@ -22,6 +25,7 @@ class _ProductsListViewState extends State<ProductsListView> {
     final products = HomeMockData.productsForSubCategory(subCategory.id);
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBackHeader(
         title: subCategory.title,
         actions: [
@@ -33,19 +37,32 @@ class _ProductsListViewState extends State<ProductsListView> {
                 arguments: subCategory.title,
               );
             },
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search, size: 24.sp),
           ),
         ],
       ),
       body: products.isEmpty
           ? Center(
-              child: Text(
-                'No products found',
-                style: Theme.of(context).textTheme.bodyLarge,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.inventory_2_outlined,
+                    size: 64.sp,
+                    color: AppColors.icon,
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    'No products found',
+                    style: AppStyles.medium16.copyWith(
+                      color: AppColors.secondaryText,
+                    ),
+                  ),
+                ],
               ),
             )
           : ListView.builder(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               itemCount: products.length,
               itemBuilder: (context, index) {
                 final product = products[index];

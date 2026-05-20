@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/Features/Home/Data/data/home_mock_data.dart';
 import 'package:polo/core/resourses/app_styles.dart';
 import 'package:polo/core/resourses/colors.dart';
@@ -52,14 +53,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: 24,
-        right: 24,
-        top: 20,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+        left: 24.w,
+        right: 24.w,
+        top: 20.h,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 24.h,
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.background,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       child: SingleChildScrollView(
         child: Column(
@@ -68,19 +69,19 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           children: [
             Center(
               child: Container(
-                width: 40,
-                height: 4,
+                width: 40.w,
+                height: 4.h,
                 decoration: BoxDecoration(
                   color: AppColors.border,
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Text('Filter', style: AppStyles.bold20),
-            const SizedBox(height: 24),
+            SizedBox(height: 20.h),
+            Text('Filter', style: AppStyles.bold20.copyWith(fontSize: 20.sp)),
+            SizedBox(height: 24.h),
             Text('Sort by', style: AppStyles.bold16),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.h),
             ..._sortOptions.map(
               (option) => RadioListTile<String>(
                 title: Text(option, style: AppStyles.medium14),
@@ -91,7 +92,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 contentPadding: EdgeInsets.zero,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text('Price range', style: AppStyles.bold16),
             RangeSlider(
               values: _priceRange,
@@ -105,31 +106,31 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ),
               onChanged: (v) => setState(() => _priceRange = v),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text('Category', style: AppStyles.bold16),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Wrap(
-              spacing: 8,
+              spacing: 8.w,
+              runSpacing: 8.h,
               children: [
                 FilterChip(
-                  label: const Text('All'),
+                  label: Text('All', style: AppStyles.medium14),
                   selected: _categoryId == null,
                   onSelected: (_) => setState(() => _categoryId = null),
                   selectedColor: AppColors.lightPrimary.withValues(alpha: 0.4),
                 ),
                 ...HomeMockData.categories.map(
                   (cat) => FilterChip(
-                    label: Text(cat.title),
+                    label: Text(cat.title, style: AppStyles.medium14),
                     selected: _categoryId == cat.id,
-                    onSelected: (_) =>
-                        setState(() => _categoryId = cat.id),
+                    onSelected: (_) => setState(() => _categoryId = cat.id),
                     selectedColor:
                         AppColors.lightPrimary.withValues(alpha: 0.4),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 28),
+            SizedBox(height: 28.h),
             Row(
               children: [
                 Expanded(
@@ -139,10 +140,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       Navigator.pop(context);
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                       side: const BorderSide(color: AppColors.primary),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                       ),
                     ),
                     child: Text(
@@ -153,20 +154,20 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 14),
+                SizedBox(width: 14.w),
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
                       gradient: AppColors.appGradient,
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(30.r),
                     ),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
                       onPressed: () {

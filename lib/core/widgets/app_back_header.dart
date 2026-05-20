@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:polo/core/resourses/app_styles.dart';
 import 'package:polo/core/resourses/colors.dart';
 
@@ -13,7 +14,7 @@ class AppBackHeader extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(56.h);
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,12 @@ class AppBackHeader extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       leading: IconButton(
         onPressed: () => Navigator.maybePop(context),
-        icon: const Icon(Icons.arrow_back_ios, size: 22),
+        icon: Icon(Icons.arrow_back_ios, size: 22.sp),
         color: AppColors.mainText,
       ),
       title: Text(
         title,
-        style: AppStyles.bold18,
+        style: AppStyles.bold18.copyWith(fontSize: 18.sp),
       ),
       centerTitle: true,
       actions: actions,

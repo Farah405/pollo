@@ -74,6 +74,18 @@ class HomeMockData {
       image: AppImages.promoFarm,
       categoryId: 'pharma',
     ),
+    SubCategoryModel(
+      id: 'vet_medicine',
+      title: 'Vet Medicine',
+      image: AppImages.promoVet,
+      categoryId: 'vet_pharma',
+    ),
+    SubCategoryModel(
+      id: 'dairy_products',
+      title: 'Dairy Products',
+      image: AppImages.promoFarm,
+      categoryId: 'milk',
+    ),
   ];
 
   static List<SubCategoryModel> subCategoriesFor(String categoryId) {
@@ -154,6 +166,30 @@ class HomeMockData {
       subCategoryId: 'pet_animals',
       rating: 4.4,
       reviews: 78,
+    ),
+    const ProductModel(
+      id: 'p7',
+      title: 'Vet Pharmacy Antiseptic',
+      image: AppImages.promoVet,
+      price: 28.50,
+      description:
+          'Broad-spectrum antiseptic solution for wound care in veterinary practice.',
+      categoryId: 'vet_pharma',
+      subCategoryId: 'vet_medicine',
+      rating: 4.6,
+      reviews: 45,
+    ),
+    const ProductModel(
+      id: 'p8',
+      title: 'Fresh Milk Powder 10kg',
+      image: AppImages.promoFarm,
+      price: 55.00,
+      description:
+          'Nutritious milk powder supplement for dairy cattle and calves.',
+      categoryId: 'milk',
+      subCategoryId: 'dairy_products',
+      rating: 4.3,
+      reviews: 67,
     ),
   ];
 
